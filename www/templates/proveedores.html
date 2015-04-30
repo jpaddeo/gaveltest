@@ -1,0 +1,20 @@
+<ion-view view-title="Proveedores">
+    <ion-nav-buttons side="secondary">
+        <button class="button" ng-click="showNewProveedor()">
+            Nuevo Proveedor
+        </button>
+    </ion-nav-buttons>    
+    <ion-content>
+        <ion-list>
+            <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" ng-repeat="proveedor in proveedores" href="#/app/proveedores/{{proveedor.nombre}}">
+                <img ng-src="{{proveedor.icon}}">
+                <h2>{{proveedor.nombre}}</h2>
+                {{proveedor.telefono}}
+                <i class="icon ion-chevron-right icon-accessory"></i>
+                <ion-option-button class="button-assertive" ng-click="removeProveedor(proveedor)">
+                    Eliminar
+                </ion-option-button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,29 @@
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">Nuevo Proveedor</h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeNewProveedor()">Cerrar</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <form ng-submit="addProveedor()">
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">Nombre</span>
+                    <input type="text" ng-model="nuevoProveedorData.nombre">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Teléfono</span>
+                    <input type="text" ng-model="nuevoProveedorData.telefono">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Icono</span>
+                    <input type="text" ng-model="nuevoProveedorData.icon">
+                </label>
+                <label class="item">
+                    <button class="button button-block button-positive" type="submit">Grabar</button>
+                </label>
+            </div>
+        </form>
+    </ion-content>
+</ion-modal-view>
