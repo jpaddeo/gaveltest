@@ -1,0 +1,29 @@
+<ion-modal-view>
+    <ion-header-bar class="bar-positive">
+        <h1 class="title">Nuevo Gasto</h1>
+        <div class="buttons">
+            <button class="button button-icon button-clear ion-ios-close-empty" ng-click="closeNewGastoDialog()"></button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <form ng-submit="addGasto()">
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">Nombre</span>
+                    <input type="text" ng-model="nuevoGastoData.nombre">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Teléfono</span>
+                    <input type="text" ng-model="nuevoGastoData.telefono">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Icono</span>
+                    <input type="text" ng-model="nuevoGastoData.icon">
+                </label>
+                <label class="item">
+                    <button class="button button-block button-positive" type="submit">Grabar</button>
+                </label>
+            </div>
+        </form>
+    </ion-content>
+</ion-modal-view>

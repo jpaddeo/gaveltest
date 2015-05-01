@@ -21,11 +21,12 @@ angular.module('abacus.controllers', ['firebase'])
                 }, 1000);
             };
         })
-        .controller('ProveedoresCtrl', function ($scope, $ionicModal, Proveedores) {
-            $scope.proveedores = Proveedores.all();
+        .controller('ProveedoresCtrl', function ($scope, $ionicModal, Proveedor) {
+            $scope.proveedores = Proveedor.all();
             $scope.removeProveedor = function (proveedor) {
-                Proveedores.remove(proveedor);
+                Proveedor.remove(proveedor);
             };
+            // Modal de Nuevo Proveedor
             $scope.nuevoProveedorData = {};
             $ionicModal.fromTemplateUrl('templates/dialogs/new_proveedor.html', {
                 scope: $scope
@@ -40,10 +41,38 @@ angular.module('abacus.controllers', ['firebase'])
                 $scope.modal.show();
             };
             $scope.addProveedor = function () {
-                Proveedores.new($scope.nuevoProveedorData);
+                Proveedor.new($scope.nuevoProveedorData);
                 $scope.closeNewProveedor();
             };
         })
         .controller('ProveedorCtrl', function ($scope, $stateParams) {
             $scope.nombre = $stateParams.provedorNombre;
+        })
+        .controller('PropiedadesCtrl', function ($scope, Propiedad) {
+            Propiedad.all($scope);
+            $scope.removePropiedad = function (propiedadId) {
+                Propiedad.remove(propiedadId);
+            };
+        })
+        .controller('PropiedadCtrl', function ($scope, $stateParams, $ionicModal, Propiedad) {
+            Propiedad.get($scope, $stateParams.propiedadId);
+            
+            // Modal de Nuevo Proveedor
+            $scope.nuevoGastoData = {};
+            $ionicModal.fromTemplateUrl('templates/dialogs/new_gasto.html', {
+                scope: $scope
+            }).then(function (modal) {
+                $scope.modal = modal;
+            });
+            $scope.closeNewGastoDialog = function () {
+                $scope.modal.hide();
+            };
+            $scope.showNewGastoDialog = function () {
+                $scope.nuevoGastoData = {};
+                $scope.modal.show();
+            };
+            $scope.addGasto = function () {
+                Propiedad.addGasto($scope.propiedad.Propiedad.id, $scope.nuevoGastoData);
+                $scope.closeNewGastoDialog();
+            };
         });

@@ -1,4 +1,5 @@
 var BASE_DB_URL = "https://jpa.firebaseio.com/abacus";
+var REST_API = {BASE_URL: 'http://auctions/rest_propiedades', KEY: '890d68ad1ef38782d8f92ac77fb4862cc5c013ae'};
 
 angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
         .run(function ($ionicPlatform) {
@@ -16,7 +17,6 @@ angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
         })
         .config(function ($stateProvider, $urlRouterProvider) {
             $stateProvider
-
                     .state('app', {
                         url: "/app",
                         abstract: true,
@@ -54,6 +54,24 @@ angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
                             'menuContent': {
                                 templateUrl: "templates/proveedor.html",
                                 controller: 'ProveedorCtrl'
+                            }
+                        }
+                    })
+                    .state('app.propiedades', {
+                        url: "/propiedades",
+                        views: {
+                            'menuContent': {
+                                templateUrl: "templates/propiedades.html",
+                                controller: 'PropiedadesCtrl'
+                            }
+                        }
+                    })
+                    .state('app.propiedad', {
+                        url: "/propiedades/:propiedadId",
+                        views: {
+                            'menuContent': {
+                                templateUrl: "templates/propiedad.html",
+                                controller: 'PropiedadCtrl'
                             }
                         }
                     });
