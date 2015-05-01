@@ -23,21 +23,19 @@ angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
                         templateUrl: "templates/menu.html",
                         controller: 'AppCtrl'
                     })
-
+                    .state('app.ingreso', {
+                        url: "/ingreso",
+                        views: {
+                            'menuContent': {
+                                templateUrl: "templates/ingreso.html"
+                            }
+                        }
+                    })
                     .state('app.search', {
                         url: "/search",
                         views: {
                             'menuContent': {
                                 templateUrl: "templates/search.html"
-                            }
-                        }
-                    })
-
-                    .state('app.browse', {
-                        url: "/browse",
-                        views: {
-                            'menuContent': {
-                                templateUrl: "templates/browse.html"
                             }
                         }
                     })
@@ -60,5 +58,5 @@ angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
                         }
                     });
             // if none of the above states are matched, use this as the fallback
-            $urlRouterProvider.otherwise('/app/proveedores');
+            $urlRouterProvider.otherwise('/app/ingreso');
         });

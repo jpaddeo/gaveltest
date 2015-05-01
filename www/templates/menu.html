@@ -14,21 +14,18 @@
 
     <ion-side-menu side="left">
         <ion-header-bar class="bar-stable">
-            <h1 class="title">Left</h1>
+            <h1 class="title">Opciones</h1>
         </ion-header-bar>
         <ion-content>
             <ion-list>
-                <ion-item nav-clear menu-close ng-click="login()">
+                <ion-item nav-clear menu-close ng-click="login()" ng-show="!userLogged">
                     Login
                 </ion-item>
-                <ion-item nav-clear menu-close href="#/app/search">
+                <ion-item nav-clear menu-close href="#/app/proveedores" ng-show="userLogged">
+                    <span class="icon-left ion-briefcase">&nbsp;&nbsp;Proveedores</span>
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/app/search" ng-show="userLogged">
                     Search
-                </ion-item>
-                <ion-item nav-clear menu-close href="#/app/browse">
-                    Browse
-                </ion-item>
-                <ion-item nav-clear menu-close href="#/app/proveedores" icon-on>
-                    <i class="icon-right ion-navicon"></i>roveedores
                 </ion-item>
             </ion-list>
         </ion-content>
