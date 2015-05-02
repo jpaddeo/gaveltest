@@ -50,13 +50,16 @@ angular.module('abacus.controllers', ['firebase'])
         })
         .controller('PropiedadesCtrl', function ($scope, Propiedad) {
             Propiedad.all($scope);
+            $scope.reloadPropiedades = function () {
+                Propiedad.all($scope);
+            };
             $scope.removePropiedad = function (propiedadId) {
                 Propiedad.remove(propiedadId);
             };
         })
         .controller('PropiedadCtrl', function ($scope, $stateParams, $ionicModal, Propiedad) {
             Propiedad.get($scope, $stateParams.propiedadId);
-            
+    
             // Modal de Nuevo Proveedor
             $scope.nuevoGastoData = {};
             $ionicModal.fromTemplateUrl('templates/dialogs/new_gasto.html', {

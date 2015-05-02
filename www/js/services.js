@@ -23,7 +23,7 @@ angular.module('abacus.services', ['firebase'])
                 }
             };
         })
-        .factory('Propiedad', function ($http, $window) {
+        .factory('Propiedad', function ($http, $ionicLoading, $location) {
             var request = {
                 method: 'GET',
                 params: {key: REST_API.KEY}
@@ -31,7 +31,9 @@ angular.module('abacus.services', ['firebase'])
             return {
                 all: function ($scope) {
                     request.url = REST_API.BASE_URL + ".json";
+                    $ionicLoading.show({template: 'Cargando...'});
                     $http(request).success(function (data) {
+                        $ionicLoading.hide();
                         $scope.propiedades = data.propiedades;
                     });
                 },
@@ -42,14 +44,15 @@ angular.module('abacus.services', ['firebase'])
                     request.method = 'DELETE';
                     request.url = REST_API.BASE_URL + "/" + propiedadId + ".json";
                     $http(request).success(function (data) {
-                        console.log(data);
-                        $window.location.reload();
+                        $location.reload();
                     });
                     //proveedores.$remove(proveedor);
                 },
                 get: function ($scope, propiedadId) {
                     request.url = REST_API.BASE_URL + "/" + propiedadId + ".json";
+                    $ionicLoading.show({template: 'Cargando...'});
                     $http(request).success(function (data) {
+                        $ionicLoading.hide();
                         $scope.propiedad = data.propiedad;
                     });
                 },

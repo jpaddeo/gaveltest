@@ -5,6 +5,10 @@
         </button>
     </ion-nav-buttons>
     <ion-content>
-        <h1>Propiedad {{propiedad.Propiedad.prop_direccion}}</h1>
+        <h1>Datos del Remate</h1>
+        <p>Fecha: <b>{{propiedad.Propiedad.rem_fecha}}</b></p>
+        <p>Caso: <b>{{propiedad.Propiedad.rem_caso}}</b></p>
+        <p>Monto Juicio: <b>{{propiedad.Propiedad.rem_monto_juicio}}</b></p>
+        <img ng-src="http://maps.google.com/maps/api/staticmap?center={{propiedad.Propiedad.prop_geo}}&zoom=16&size=300x300&maptype=roadmap&markers={{propiedad.Propiedad.prop_geo}}&sensor=false" />
     </ion-content>
 </ion-view>
