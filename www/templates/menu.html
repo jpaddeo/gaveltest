@@ -18,17 +18,11 @@
         </ion-header-bar>
         <ion-content>
             <ion-list>
-                <ion-item nav-clear menu-close ng-click="login()" ng-show="!userLogged">
-                    Login
-                </ion-item>
-                <ion-item nav-clear menu-close href="#/app/proveedores" ng-show="userLogged">
+                <ion-item nav-clear menu-close href="#/app/proveedores">
                     <span class="icon-left ion-ios-briefcase">&nbsp;&nbsp;Proveedores</span>
                 </ion-item>
-                <ion-item nav-clear menu-close href="#/app/propiedades" ng-show="userLogged">
+                <ion-item nav-clear menu-close href="#/app/propiedades">
                     <span class="icon-left ion-ios-home">&nbsp;&nbsp;Propiedades</span>
-                </ion-item>
-                <ion-item nav-clear menu-close href="#/app/search" ng-show="userLogged">
-                    Search
                 </ion-item>
             </ion-list>
         </ion-content>

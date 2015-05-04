@@ -2,10 +2,10 @@
 <widget id="com.ionicframework.abacus792742" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>abacus</name>
   <description>&#xD;
-        An Ionic Framework and Cordova project.&#xD;
+        The mobile version for www.gaveltest.com.ar.&#xD;
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">&#xD;
-      Ionic Framework Team&#xD;
+  <author email="jp.pwm.2011@gmail.com" href="http://www.gaveltest.com.ar/">&#xD;
+      GavelTest Group&#xD;
     </author>
   <content src="index.html"/>
   <access origin="*"/>

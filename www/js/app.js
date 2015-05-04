@@ -1,5 +1,5 @@
 var BASE_DB_URL = "https://jpa.firebaseio.com/abacus";
-var REST_API = {BASE_URL: 'http://auctions/rest_propiedades', KEY: '890d68ad1ef38782d8f92ac77fb4862cc5c013ae'};
+var REST_API = {BASE_URL: 'http://auctions', KEY: '890d68ad1ef38782d8f92ac77fb4862cc5c013ae'};
 
 angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
         .run(function ($ionicPlatform) {
@@ -15,29 +15,14 @@ angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
                 }
             });
         })
-        .config(function ($stateProvider, $urlRouterProvider) {
+        .config(function ($compileProvider, $stateProvider, $urlRouterProvider) {
+            $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|geo|tel):/);
             $stateProvider
                     .state('app', {
                         url: "/app",
                         abstract: true,
                         templateUrl: "templates/menu.html",
                         controller: 'AppCtrl'
-                    })
-                    .state('app.ingreso', {
-                        url: "/ingreso",
-                        views: {
-                            'menuContent': {
-                                templateUrl: "templates/ingreso.html"
-                            }
-                        }
-                    })
-                    .state('app.search', {
-                        url: "/search",
-                        views: {
-                            'menuContent': {
-                                templateUrl: "templates/search.html"
-                            }
-                        }
                     })
                     .state('app.proveedores', {
                         url: "/proveedores",
@@ -76,5 +61,5 @@ angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
                         }
                     });
             // if none of the above states are matched, use this as the fallback
-            $urlRouterProvider.otherwise('/app/ingreso');
+            $urlRouterProvider.otherwise('/app/propiedades');
         });

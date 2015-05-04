@@ -1,1 +1,13 @@
 /* Empty. Add your own CSS if you like */
+.item-icon-right .second {
+    right:40px !important;
+}
+.item-icon-right .first {
+    right:70px !important;
+}
+.item-icon-left .second {
+    left:40px !important;
+}
+.item-icon-left .first {
+    left:70px !important;
+}

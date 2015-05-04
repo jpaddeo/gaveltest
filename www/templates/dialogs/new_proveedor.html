@@ -7,21 +7,25 @@
     </ion-header-bar>
     <ion-content>
         <form ng-submit="addProveedor()">
-            <div class="list">
+            <div class="list list-inset">          
                 <label class="item item-input">
-                    <span class="input-label">Nombre</span>
-                    <input type="text" ng-model="nuevoProveedorData.nombre">
+                    <i class="icon ion-ios-person placeholder-icon"></i>
+                    <input type="text" placeholder="Razón Social" ng-model="nuevoProveedorData.razon_social">
                 </label>
                 <label class="item item-input">
-                    <span class="input-label">Teléfono</span>
-                    <input type="text" ng-model="nuevoProveedorData.telefono">
+                    <i class="icon ion-ios-email placeholder-icon"></i>
+                    <input type="email" placeholder="Email" ng-model="nuevoProveedorData.email">
                 </label>
                 <label class="item item-input">
-                    <span class="input-label">Icono</span>
-                    <input type="text" ng-model="nuevoProveedorData.icon">
+                    <i class="icon ion-ios-telephone placeholder-icon"></i>
+                    <input type="tel" placeholder="Teléfono" ng-model="nuevoProveedorData.telefono">
+                </label>
+                <label class="item item-input">
+                    <i class="icon ion-ios-home placeholder-icon"></i>
+                    <input type="text" placeholder="Domicilio" ng-model="nuevoProveedorData.domicilio">
                 </label>
                 <label class="item">
-                    <button class="button button-block button-positive" type="submit">Grabar</button>
+                    <button type="submit" class="button button-full icon-right ion-ios-plus-outline button-balanced">Grabar</button>
                 </label>
             </div>
         </form>

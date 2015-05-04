@@ -1,30 +1,11 @@
 angular.module('abacus.controllers', ['firebase'])
         .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
-            $scope.loginData = {};
-            $scope.userLogged = false;
-            $ionicModal.fromTemplateUrl('templates/dialogs/login.html', {
-                scope: $scope
-            }).then(function (modal) {
-                $scope.modal = modal;
-            });
-            $scope.closeLogin = function () {
-                $scope.modal.hide();
-            };
-            $scope.login = function () {
-                $scope.modal.show();
-            };
-            $scope.doLogin = function () {
-                console.log('Doing login', $scope.loginData);
-                $timeout(function () {
-                    $scope.userLogged = true;
-                    $scope.closeLogin();
-                }, 1000);
-            };
         })
         .controller('ProveedoresCtrl', function ($scope, $ionicModal, Proveedor) {
-            $scope.proveedores = Proveedor.all();
+            Proveedor.all($scope);
+    
             $scope.removeProveedor = function (proveedor) {
-                Proveedor.remove(proveedor);
+                Proveedor.remove($scope, proveedor);
             };
             // Modal de Nuevo Proveedor
             $scope.nuevoProveedorData = {};
@@ -41,7 +22,7 @@ angular.module('abacus.controllers', ['firebase'])
                 $scope.modal.show();
             };
             $scope.addProveedor = function () {
-                Proveedor.new($scope.nuevoProveedorData);
+                Proveedor.new($scope, $scope.nuevoProveedorData);
                 $scope.closeNewProveedor();
             };
         })
@@ -59,7 +40,7 @@ angular.module('abacus.controllers', ['firebase'])
         })
         .controller('PropiedadCtrl', function ($scope, $stateParams, $ionicModal, Propiedad) {
             Propiedad.get($scope, $stateParams.propiedadId);
-    
+
             // Modal de Nuevo Proveedor
             $scope.nuevoGastoData = {};
             $ionicModal.fromTemplateUrl('templates/dialogs/new_gasto.html', {
