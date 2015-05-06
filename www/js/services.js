@@ -48,13 +48,13 @@ angular.module('abacus.services', ['firebase'])
                 },
                 remove: function ($scope, proveedorId) {
                     request.method = 'DELETE';
-                    request.url = REST_API.BASE_URL + "/rest_proveedores" + proveedorId + ".json";
+                    request.url = REST_API.BASE_URL + "/rest_proveedores/" + proveedorId + ".json";
                     $http(request).success(function (data) {
                         $window.location.reload();
                     });
                 },
                 get: function ($scope, proveedorId) {
-                    request.url = REST_API.BASE_URL + "/rest_proveedores" + proveedorId + ".json";
+                    request.url = REST_API.BASE_URL + "/rest_proveedores/" + proveedorId + ".json";
                     $ionicLoading.show({template: 'Cargando...'});
                     $http(request).success(function (data) {
                         $ionicLoading.hide();
@@ -82,14 +82,14 @@ angular.module('abacus.services', ['firebase'])
                 },
                 remove: function (propiedadId) {
                     request.method = 'DELETE';
-                    request.url = REST_API.BASE_URL + "/rest_propiedades" + propiedadId + ".json";
+                    request.url = REST_API.BASE_URL + "/rest_propiedades/" + propiedadId + ".json";
                     $http(request).success(function (data) {
                         $location.reload();
                     });
                     //proveedores.$remove(proveedor);
                 },
                 get: function ($scope, propiedadId) {
-                    request.url = REST_API.BASE_URL + "/rest_propiedades" + propiedadId + ".json";
+                    request.url = REST_API.BASE_URL + "/rest_propiedades/" + propiedadId + ".json";
                     $ionicLoading.show({template: 'Cargando...'});
                     $http(request).success(function (data) {
                         $ionicLoading.hide();

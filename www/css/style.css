@@ -1,4 +1,11 @@
-/* Empty. Add your own CSS if you like */
+/* Montos */
+.monto-rojo {
+    color: #e42012;
+}
+.monto-verde {
+    color: #33cd5f;
+}
+/* Múltiples íconos en un mismo item de una ion-list */
 .item-icon-right .second {
     right:40px !important;
 }
