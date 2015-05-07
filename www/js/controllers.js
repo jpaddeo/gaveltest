@@ -1,9 +1,28 @@
 angular.module('abacus.controllers', ['firebase'])
-        .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
+        .controller('TabsCtrl', function ($scope, $rootScope) {
+            $scope.hideClass = 'ng-hide';
+            $scope.showClass = 'ng-show';
+            $scope.currentUser = function () {
+                return $rootScope.currentUser;
+            };
+        })
+        .controller('LoginCtrl', function ($scope, $rootScope, AuthService) {
+            $scope.loginUser = {};
+            $scope.addUser = function () {
+                if ($scope.loginUser.email && $scope.loginUser.password) {
+                    AuthService.createUser($rootScope, $scope.loginUser);
+                    $scope.loginUser = {};
+                }
+            };
+            $scope.doLogin = function () {
+                if ($rootScope.currentUser) {
+                    AuthService.authenticate($rootScope, $scope.loginUser);
+                    $scope.loginUser = {};
+                }
+            };
         })
         .controller('ProveedoresCtrl', function ($scope, $ionicModal, Proveedor) {
             Proveedor.all($scope);
-    
             $scope.removeProveedor = function (proveedor) {
                 Proveedor.remove($scope, proveedor);
             };
@@ -40,7 +59,6 @@ angular.module('abacus.controllers', ['firebase'])
         })
         .controller('PropiedadCtrl', function ($scope, $stateParams, $ionicModal, Propiedad) {
             Propiedad.get($scope, $stateParams.propiedadId);
-
             // Modal de Nuevo Proveedor
             $scope.nuevoGastoData = {};
             $ionicModal.fromTemplateUrl('templates/dialogs/new_gasto.html', {
@@ -59,4 +77,7 @@ angular.module('abacus.controllers', ['firebase'])
                 Propiedad.addGasto($scope.propiedad.Propiedad.id, $scope.nuevoGastoData);
                 $scope.closeNewGastoDialog();
             };
+        })
+        .controller('MensajesCtrl', function () {
+
         });

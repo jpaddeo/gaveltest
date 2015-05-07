@@ -1,0 +1,18 @@
+<ion-view view-title="Proveedores">
+
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-ios-plus-empty" ng-click="showNewProveedor()">
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content>
+        <div class="list">
+            <li class="item item-icon-right" ng-repeat="proveedor in proveedores" href="#/app/proveedores/{{proveedor.Proveedor.id}}">
+                {{proveedor.Proveedor.razon_social}}
+                <a ng-show="{{proveedor.Proveedor.email.length}}" ng-href="mailto:{{proveedor.Proveedor.email}}"><i class="first icon ion-ios-email-outline"></i></a>
+                <a ng-show="{{proveedor.Proveedor.telefono.length}}" ng-href="tel:{{proveedor.Proveedor.telefono}}"><i class="second icon ion-ios-telephone-outline"></i></a>
+                <a ng-show="{{proveedor.Proveedor.geo.length}}" ng-href="geo:{{proveedor.Proveedor.geo}}"><i class="icon ion-pinpoint"></i></a>
+            </li>
+        </div>
+    </ion-content>
+</ion-view>
