@@ -41,14 +41,15 @@ angular.module('abacus.services', [])
                     });
                 },
                 logout: function ($rootScope) {
-                    alert("A");
                     var _ref = new Firebase($rootScope.BASE_DB_URL);
                     var _auth = $firebaseAuth(_ref);
                     $ionicLoading.show({template: 'Deslogueando...'});
-                    if($rootScope) {
-                        $rootScope.currentUser = {};
+                    if ($rootScope) {
+                        $rootScope.currentUser = null;
                     }
                     _auth.$unauth();
+                    $ionicLoading.hide();
+                    $state.transitionTo("app.login");
                 }
             };
         }

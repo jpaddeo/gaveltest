@@ -11,9 +11,12 @@ angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
                     StatusBar.styleDefault();
                 }
 
-                $rootScope.currentUser = {};
+                $rootScope.currentUser = null;
                 $rootScope.BASE_DB_URL = "https://jpa.firebaseio.com/abacus";
-                $rootScope.REST_API = {BASE_URL: 'http://auctions', KEY: '890d68ad1ef38782d8f92ac77fb4862cc5c013ae'};
+                $rootScope.REST_API = {BASE_URL: 'http://www.gaveltest.com.ar', KEY: '890d68ad1ef38782d8f92ac77fb4862cc5c013ae'};
+                $rootScope.logout = function() {
+                    AuthService.logout($rootScope);
+                };
             });
         })
         .config(function ($compileProvider, $stateProvider, $urlRouterProvider) {
@@ -41,8 +44,7 @@ angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
                                 templateUrl: "templates/tab-proveedores.html",
                                 controller: 'ProveedoresCtrl'
                             }
-                        },
-                        authRequired: true
+                        }
                     })
                     .state('app.proveedor', {
                         url: "/proveedores/:provedorNombre",
@@ -51,8 +53,7 @@ angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
                                 templateUrl: "templates/proveedor.html",
                                 controller: 'ProveedorCtrl'
                             }
-                        },
-                        authRequired: true
+                        }
                     })
                     .state('app.propiedades', {
                         url: "/propiedades",
@@ -61,8 +62,7 @@ angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
                                 templateUrl: "templates/tab-propiedades.html",
                                 controller: 'PropiedadesCtrl'
                             }
-                        },
-                        authRequired: true
+                        }
                     })
                     .state('app.propiedad', {
                         url: "/propiedades/:propiedadId",
@@ -71,8 +71,7 @@ angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
                                 templateUrl: "templates/propiedad.html",
                                 controller: 'PropiedadCtrl'
                             }
-                        },
-                        authRequired: true
+                        }
                     })
                     .state('app.mensajes', {
                         url: "/mensajes",
@@ -81,13 +80,11 @@ angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
                                 templateUrl: "templates/tab-mensajes.html",
                                 controller: 'MensajesCtrl'
                             }
-                        },
-                        authRequired: true
+                        }
                     })
                     .state('app.logout', {
                         url: "/logout",
                         abstract: true,
-                        authRequired: true,
                         controller: function ($rootScope, AuthService) {
                             AuthService.logout($rootScope);
                         }

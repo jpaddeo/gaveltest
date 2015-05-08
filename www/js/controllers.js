@@ -3,7 +3,7 @@ angular.module('abacus.controllers', ['firebase'])
             $scope.hideClass = 'ng-hide';
             $scope.showClass = 'ng-show';
             $scope.currentUser = function () {
-                return $rootScope.currentUser;
+                return !empty($rootScope.currentUser);
             };
         })
         .controller('LoginCtrl', function ($scope, $rootScope, AuthService) {
@@ -15,7 +15,7 @@ angular.module('abacus.controllers', ['firebase'])
                 }
             };
             $scope.doLogin = function () {
-                if ($rootScope.currentUser) {
+                if (empty($rootScope.currentUser)) {
                     AuthService.authenticate($rootScope, $scope.loginUser);
                     $scope.loginUser = {};
                 }
