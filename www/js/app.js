@@ -10,10 +10,7 @@ angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
                     // org.apache.cordova.statusbar required
                     StatusBar.styleDefault();
                 }
-
                 $rootScope.currentUser = null;
-                $rootScope.BASE_DB_URL = "https://jpa.firebaseio.com/abacus";
-                $rootScope.REST_API = {BASE_URL: 'http://www.gaveltest.com.ar', KEY: '890d68ad1ef38782d8f92ac77fb4862cc5c013ae'};
                 $rootScope.logout = function() {
                     AuthService.logout($rootScope);
                 };

@@ -2,7 +2,7 @@ angular.module('abacus.services', [])
         .factory('AuthService', function ($firebaseAuth, $ionicLoading, $state) {
             return {
                 authenticate: function ($rootScope, user) {
-                    var _ref = new Firebase($rootScope.BASE_DB_URL);
+                    var _ref = new Firebase(_GLOBAL_CONFIG.DB_PATH);
                     var _auth = $firebaseAuth(_ref);
                     $ionicLoading.show({template: 'Autenticando...'});
                     _auth.$authWithPassword({
@@ -20,7 +20,7 @@ angular.module('abacus.services', [])
                     });
                 },
                 createUser: function ($rootScope, pUser) {
-                    var _ref = new Firebase($rootScope.BASE_DB_URL);
+                    var _ref = new Firebase($rootScope.DB_PATH);
                     var _auth = $firebaseAuth(_ref);
                     $ionicLoading.show({template: 'Registrando...'});
                     _auth.$createUser({
@@ -41,7 +41,7 @@ angular.module('abacus.services', [])
                     });
                 },
                 logout: function ($rootScope) {
-                    var _ref = new Firebase($rootScope.BASE_DB_URL);
+                    var _ref = new Firebase($rootScope.DB_PATH);
                     var _auth = $firebaseAuth(_ref);
                     $ionicLoading.show({template: 'Deslogueando...'});
                     if ($rootScope) {
@@ -52,10 +52,9 @@ angular.module('abacus.services', [])
                     $state.transitionTo("app.login");
                 }
             };
-        }
-        )
-        .factory('ProveedorFB', function ($rootScope, $firebaseArray) {
-            var refProveedores = new Firebase($rootScope.BASE_DB_URL + "/proveedores");
+        })
+        .factory('ProveedorFB', function ($firebaseArray) {
+            var refProveedores = new Firebase(_GLOBAL_CONFIG.DB_PATH + "/proveedores");
             var proveedores = $firebaseArray(refProveedores);
 
             return {
@@ -78,14 +77,14 @@ angular.module('abacus.services', [])
                 }
             };
         })
-        .factory('Proveedor', function ($rootScope, $http, $ionicLoading, $window) {
+        .factory('Proveedor', function ($http, $ionicLoading, $window) {
             var request = {
                 method: 'GET',
-                params: {key: $rootScope.REST_API.KEY}
+                params: {key: _GLOBAL_CONFIG.REST_API.KEY}
             };
             return {
                 all: function ($scope) {
-                    request.url = $rootScope.REST_API.BASE_URL + "/rest_proveedores.json";
+                    request.url = _GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_proveedores.json";
                     $ionicLoading.show({template: 'Cargando...'});
                     $http(request).success(function (data) {
                         $ionicLoading.hide();
@@ -94,7 +93,7 @@ angular.module('abacus.services', [])
                 },
                 new : function ($scope, proveedor) {
                     request.method = 'POST';
-                    request.url = $rootScope.REST_API.BASE_URL + "/rest_proveedores.json";
+                    request.url = _GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_proveedores.json";
                     request.data = proveedor;
                     $http(request).success(function (data) {
                         $scope.closeNewProveedor();
@@ -103,13 +102,13 @@ angular.module('abacus.services', [])
                 },
                 remove: function ($scope, proveedorId) {
                     request.method = 'DELETE';
-                    request.url = $rootScope.REST_API.BASE_URL + "/rest_proveedores/" + proveedorId + ".json";
+                    request.url = _GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_proveedores/" + proveedorId + ".json";
                     $http(request).success(function (data) {
                         $window.location.reload();
                     });
                 },
                 get: function ($scope, proveedorId) {
-                    request.url = $rootScope.REST_API.BASE_URL + "/rest_proveedores/" + proveedorId + ".json";
+                    request.url = _GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_proveedores/" + proveedorId + ".json";
                     $ionicLoading.show({template: 'Cargando...'});
                     $http(request).success(function (data) {
                         $ionicLoading.hide();
@@ -118,14 +117,14 @@ angular.module('abacus.services', [])
                 }
             };
         })
-        .factory('Propiedad', function ($rootScope, $http, $ionicLoading, $location) {
+        .factory('Propiedad', function ($http, $ionicLoading, $location) {
             var request = {
                 method: 'GET',
-                params: {key: $rootScope.REST_API.KEY}
+                params: {key: _GLOBAL_CONFIG.REST_API.KEY}
             };
             return {
                 all: function ($scope) {
-                    request.url = $rootScope.REST_API.BASE_URL + "/rest_propiedades.json";
+                    request.url = _GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_propiedades.json";
                     $ionicLoading.show({template: 'Cargando...'});
                     $http(request).success(function (data) {
                         $ionicLoading.hide();
@@ -137,14 +136,14 @@ angular.module('abacus.services', [])
                 },
                 remove: function (propiedadId) {
                     request.method = 'DELETE';
-                    request.url = $rootScope.REST_API.BASE_URL + "/rest_propiedades/" + propiedadId + ".json";
+                    request.url = _GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_propiedades/" + propiedadId + ".json";
                     $http(request).success(function (data) {
                         $location.reload();
                     });
                     //proveedores.$remove(proveedor);
                 },
                 get: function ($scope, propiedadId) {
-                    request.url = $rootScope.REST_API.BASE_URL + "/rest_propiedades/" + propiedadId + ".json";
+                    request.url = _GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_propiedades/" + propiedadId + ".json";
                     $ionicLoading.show({template: 'Cargando...'});
                     $http(request).success(function (data) {
                         $ionicLoading.hide();
