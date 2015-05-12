@@ -20,7 +20,7 @@ angular.module('abacus.services', [])
                     });
                 },
                 createUser: function ($rootScope, pUser) {
-                    var _ref = new Firebase($rootScope.DB_PATH);
+                    var _ref = new Firebase(_GLOBAL_CONFIG.DB_PATH);
                     var _auth = $firebaseAuth(_ref);
                     $ionicLoading.show({template: 'Registrando...'});
                     _auth.$createUser({
@@ -41,7 +41,7 @@ angular.module('abacus.services', [])
                     });
                 },
                 logout: function ($rootScope) {
-                    var _ref = new Firebase($rootScope.DB_PATH);
+                    var _ref = new Firebase(_GLOBAL_CONFIG.DB_PATH);
                     var _auth = $firebaseAuth(_ref);
                     $ionicLoading.show({template: 'Deslogueando...'});
                     if ($rootScope) {
@@ -113,7 +113,7 @@ angular.module('abacus.services', [])
                     $http(request).success(function (data) {
                         $ionicLoading.hide();
                         $scope.proveedor = data.proveedor;
-                    });
+                    });                
                 }
             };
         })
@@ -144,6 +144,7 @@ angular.module('abacus.services', [])
                 },
                 get: function ($scope, propiedadId) {
                     request.url = _GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_propiedades/" + propiedadId + ".json";
+                    alert(request.url);
                     $ionicLoading.show({template: 'Cargando...'});
                     $http(request).success(function (data) {
                         $ionicLoading.hide();
