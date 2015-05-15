@@ -5,6 +5,14 @@
 .monto-verde {
     color: #33cd5f;
 }
+/* Mapa */
+map {
+    width: 100%;
+    height: 100% !important;
+}
+.scroll, .mapWrap {
+    height: 100%;
+}
 /* Múltiples íconos en un mismo item de una ion-list */
 .item-icon-right .second {
     right:40px !important;

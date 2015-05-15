@@ -1,0 +1,9 @@
+<ion-view view-title="Mapa">
+    <ion-content scroll="false">
+        <div class="mapWrap"  data-tap-disabled="true">
+            <map center="{{defaultConfig.POSITION}}" zoom="{{defaultConfig.ZOOM}}"> 
+                <marker ng-repeat="propiedad in propiedades" position="{{propiedad.Propiedad.prop_geo}}" icon="img/{{(propiedad.Propiedad.op_monto_venta > 0) ? 'marker_green' : 'marker_red'}}.png"></marker>
+            </map> 
+        </div>
+    </ion-content>
+</ion-view>

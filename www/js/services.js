@@ -113,7 +113,7 @@ angular.module('abacus.services', [])
                     $http(request).success(function (data) {
                         $ionicLoading.hide();
                         $scope.proveedor = data.proveedor;
-                    });                
+                    });
                 }
             };
         })
@@ -144,7 +144,6 @@ angular.module('abacus.services', [])
                 },
                 get: function ($scope, propiedadId) {
                     request.url = _GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_propiedades/" + propiedadId + ".json";
-                    alert(request.url);
                     $ionicLoading.show({template: 'Cargando...'});
                     $http(request).success(function (data) {
                         $ionicLoading.hide();

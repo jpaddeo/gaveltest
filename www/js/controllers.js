@@ -1,4 +1,4 @@
-angular.module('abacus.controllers', ['firebase'])
+angular.module('abacus.controllers', ['firebase', 'ngMap'])
         .controller('TabsCtrl', function ($scope, $rootScope) {
             $scope.hideClass = 'ng-hide';
             $scope.showClass = 'ng-show';
@@ -77,6 +77,13 @@ angular.module('abacus.controllers', ['firebase'])
                 Propiedad.addGasto($scope.propiedad.Propiedad.id, $scope.nuevoGastoData);
                 $scope.closeNewGastoDialog();
             };
+        })
+        .controller('MapaCtrl', function ($scope, Propiedad) {
+            $scope.defaultConfig = _GLOBAL_CONFIG.GEO.DEFAULT_CONFIG;
+            Propiedad.all($scope);
+            $scope.$on('mapInitialized', function (event, map) {
+                $scope.map = map;
+            });
         })
         .controller('MensajesCtrl', function () {
 

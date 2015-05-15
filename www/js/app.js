@@ -70,6 +70,15 @@ angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
                             }
                         }
                     })
+                    .state('app.mapa', {
+                        url: "/mapa",
+                        views: {
+                            'tab-mapa': {
+                                templateUrl: "templates/tab-mapa.html",
+                                controller: 'MapaCtrl'
+                            }
+                        }
+                    })
                     .state('app.mensajes', {
                         url: "/mensajes",
                         views: {
