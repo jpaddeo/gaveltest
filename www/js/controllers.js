@@ -6,17 +6,17 @@ angular.module('abacus.controllers', ['firebase', 'ngMap'])
                 return !empty($rootScope.currentUser);
             };
         })
-        .controller('LoginCtrl', function ($scope, $rootScope, AuthService) {
+        .controller('LoginCtrl', function ($scope, $rootScope, AuthServiceRest) {
             $scope.loginUser = {};
             $scope.addUser = function () {
                 if ($scope.loginUser.email && $scope.loginUser.password) {
-                    AuthService.createUser($rootScope, $scope.loginUser);
+                    AuthServiceRest.createUser($rootScope, $scope.loginUser);
                     $scope.loginUser = {};
                 }
             };
             $scope.doLogin = function () {
                 if (empty($rootScope.currentUser)) {
-                    AuthService.authenticate($rootScope, $scope.loginUser);
+                    AuthServiceRest.authenticate($rootScope, $scope.loginUser);
                     $scope.loginUser = {};
                 }
             };

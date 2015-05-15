@@ -1,5 +1,5 @@
 angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
-        .run(function ($ionicPlatform, $rootScope, AuthService) {
+        .run(function ($ionicPlatform, $rootScope, AuthServiceRest) {
             $ionicPlatform.ready(function () {
                 // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
                 // for form inputs)
@@ -12,7 +12,7 @@ angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
                 }
                 $rootScope.currentUser = null;
                 $rootScope.logout = function() {
-                    AuthService.logout($rootScope);
+                    AuthServiceRest.logout($rootScope);
                 };
             });
         })

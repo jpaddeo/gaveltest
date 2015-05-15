@@ -53,6 +53,53 @@ angular.module('abacus.services', [])
                 }
             };
         })
+        .factory('AuthServiceRest', function ($http, $ionicLoading, $state) {
+            return {
+                authenticate: function ($rootScope, user) {
+                    var request = {
+                        method: 'POST',
+                        params: {key: _GLOBAL_CONFIG.REST_API.KEY},
+                        data: {username: user.email, password: user.password}
+                    };
+                    request.url = _GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_users/validar";
+                    $ionicLoading.show({template: 'Autenticando...'});
+                    $http(request).success(function (data) {
+                        $ionicLoading.hide();
+                        if (data.error) {
+                            alert("Falló la autenticación:" + data.error);
+                        } else {
+                            if (data.usuario) {
+                                $rootScope.currentUser = data.usuario;
+                                $state.transitionTo("app.propiedades");
+                            }
+                        }
+                    });
+                },
+                createUser: function ($rootScope, user) {
+                    var request = {
+                        method: 'POST',
+                        url: _GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_users.json",
+                        params: {key: _GLOBAL_CONFIG.REST_API.KEY},
+                        data: {nombre: user.nombre, apellido: user.nombre, email: user.email, username: user.email.substr(0, user.email.indexOf('@')), password: user.password, confirm_password: user.password, estado: 'Activo'}
+                    };
+                    $ionicLoading.show({template: 'Registrando...'});
+                    $http(request).success(function (data) {
+                        console.log(data);
+                        $ionicLoading.hide();
+                        $rootScope.currentUser = user;
+                        $state.transitionTo("app.propiedades");
+                    });
+                },
+                logout: function ($rootScope) {
+                    $ionicLoading.show({template: 'Deslogueando...'});
+                    if ($rootScope) {
+                        $rootScope.currentUser = null;
+                    }
+                    $ionicLoading.hide();
+                    $state.transitionTo("app.login");
+                }
+            };
+        })
         .factory('ProveedorFB', function ($firebaseArray) {
             var refProveedores = new Firebase(_GLOBAL_CONFIG.DB_PATH + "/proveedores");
             var proveedores = $firebaseArray(refProveedores);
