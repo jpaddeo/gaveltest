@@ -80,11 +80,10 @@ angular.module('abacus.services', [])
                         method: 'POST',
                         url: _GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_users.json",
                         params: {key: _GLOBAL_CONFIG.REST_API.KEY},
-                        data: {nombre: user.nombre, apellido: user.nombre, email: user.email, username: user.email.substr(0, user.email.indexOf('@')), password: user.password, confirm_password: user.password, estado: 'Activo'}
+                        data: {firstname: user.nombre, lastname: user.nombre, email: user.email, username: user.email.substr(0, user.email.indexOf('@')), password: user.password, confirm_password: user.password, estado: 'Activo'}
                     };
                     $ionicLoading.show({template: 'Registrando...'});
                     $http(request).success(function (data) {
-                        console.log(data);
                         $ionicLoading.hide();
                         $rootScope.currentUser = user;
                         $state.transitionTo("app.propiedades");
