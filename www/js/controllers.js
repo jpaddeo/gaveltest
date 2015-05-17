@@ -78,11 +78,14 @@ angular.module('abacus.controllers', ['firebase', 'ngMap'])
                 $scope.closeNewGastoDialog();
             };
         })
-        .controller('MapaCtrl', function ($scope, Propiedad) {
+        .controller('MapaCtrl', function ($scope, $ionicPopup, Propiedad) {
             $scope.defaultConfig = _GLOBAL_CONFIG.GEO.DEFAULT_CONFIG;
             Propiedad.all($scope);
             $scope.$on('mapInitialized', function (event, map) {
                 $scope.map = map;
+                for (var i in $scope.map.markers) {
+                    console.log($scope.map.markers[i].infoWindow);
+                }
             });
         })
         .controller('MensajesCtrl', function () {
