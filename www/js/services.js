@@ -175,6 +175,8 @@ angular.module('abacus.services', [])
                     $http(request).success(function (data) {
                         $ionicLoading.hide();
                         $scope.propiedades = data.propiedades;
+                    }).finally(function () {
+                        $scope.$broadcast('scroll.refreshComplete');
                     });
                 },
                 new : function (proveedor) {

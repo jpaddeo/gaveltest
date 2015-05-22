@@ -1,7 +1,8 @@
 <ion-view view-title="Propiedades">    
     <ion-content>
+        <ion-refresher pulling-text="Actualizar" on-refresh="actualizarPropiedades();"></ion-refresher>
         <ion-list>
-            <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" ng-repeat="propiedad in propiedades" href="#/app/propiedades/{{propiedad.Propiedad.id}}">
+            <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" on-hold="mostrarMenuContextualPropiedad();" ng-repeat="propiedad in propiedades" href="#/app/propiedades/{{propiedad.Propiedad.id}}">
                 <img ng-src="http://maps.google.com/maps/api/staticmap?center={{propiedad.Propiedad.prop_geo}}&zoom=16&size=80x80&maptype=roadmap&markers={{propiedad.Propiedad.prop_geo}}&sensor=false">
                 <h2>{{propiedad.Propiedad.prop_direccion}}</h2>
                 {{propiedad.Propiedad.prop_nro_parcela}}

@@ -48,8 +48,29 @@ angular.module('abacus.controllers', ['firebase', 'ngMap'])
         .controller('ProveedorCtrl', function ($scope, $stateParams) {
             $scope.nombre = $stateParams.provedorNombre;
         })
-        .controller('PropiedadesCtrl', function ($scope, Propiedad) {
+        .controller('PropiedadesCtrl', function ($scope, $ionicActionSheet, Propiedad) {
             Propiedad.all($scope);
+            $scope.actualizarPropiedades = function () {
+                Propiedad.all($scope);
+            };
+            $scope.mostrarMenuContextualPropiedad = function () {
+                $ionicActionSheet.show({
+                    buttons: [{text: 'Recargar'}],
+                    titleText: 'Acciones',
+                    cancelText: 'Cancelar',
+                    cancel: function () {},
+                    buttonClicked: function (index) {
+                        switch(index) {
+                            case 0:
+                                Propiedad.all($scope);
+                                break;
+                            default:
+                                break;
+                        }
+                        return true;
+                    }
+                });
+            };
             $scope.reloadPropiedades = function () {
                 Propiedad.all($scope);
             };

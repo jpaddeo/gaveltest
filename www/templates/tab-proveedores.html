@@ -7,7 +7,7 @@
 
     <ion-content>
         <div class="list">
-            <li class="item item-icon-right" ng-repeat="proveedor in proveedores" href="#/app/proveedores/{{proveedor.Proveedor.id}}">
+            <li class="item item-icon-right" ng-repeat="proveedor in proveedores">
                 {{proveedor.Proveedor.razon_social}}
                 <a ng-show="{{proveedor.Proveedor.email.length}}" ng-href="mailto:{{proveedor.Proveedor.email}}"><i class="first icon ion-ios-email-outline"></i></a>
                 <a ng-show="{{proveedor.Proveedor.telefono.length}}" ng-href="tel:{{proveedor.Proveedor.telefono}}"><i class="second icon ion-ios-telephone-outline"></i></a>

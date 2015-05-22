@@ -91,8 +91,8 @@ angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
                     .state('app.logout', {
                         url: "/logout",
                         abstract: true,
-                        controller: function ($rootScope, AuthService) {
-                            AuthService.logout($rootScope);
+                        controller: function ($rootScope, AuthServiceRest) {
+                            AuthServiceRest.logout($rootScope);
                         }
                     });
             // if none of the above states are matched, use this as the fallback
