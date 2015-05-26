@@ -1,5 +1,22 @@
 <ion-view view-title="Proveedor">
     <ion-content>
-        <h1>Proveedor {{nombre}}</h1>
+        <div class="item item-divider">
+            <h2><b>{{proveedor.Proveedor.razon_social}}</b></h2>
+        </div>        
+        <a class="item item-icon-right" href="mailto:{{proveedor.Proveedor.email}}" ng-hide="!proveedor.Proveedor.email">
+            <i class="icon ion-ios-email"></i>
+            {{proveedor.Proveedor.email}}
+        </a>
+        <a class="item item-icon-right" href="tel:{{proveedor.Proveedor.telefono}}" ng-hide="!proveedor.Proveedor.telefono">
+            <i class="icon ion-ios-telephone"></i>
+            {{proveedor.Proveedor.telefono}}
+        </a>
+        <a class="item item-icon-right" href="maps:ll={{proveedor.Proveedor.geo}}" ng-hide="!proveedor.Proveedor.domicilio">
+            <i class="icon ion-ios-location"></i>
+            {{proveedor.Proveedor.domicilio}}
+        </a>
+        <div class="item">
+            {{proveedor.Proveedor.rubro}}
+        </div>
     </ion-content>
 </ion-view>

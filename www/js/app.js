@@ -1,4 +1,18 @@
 angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
+        .constant("GLOBAL_CONFIG", {
+            DB_PATH: 'https://jpa.firebaseio.com/abacus',
+            GEO: {
+                DEFAULT_CONFIG: {
+                    ZOOM: '6',
+                    POSITION: '27.8333,-81.7170'
+                }
+            },
+            REST_API: {
+                KEY: '890d68ad1ef38782d8f92ac77fb4862cc5c013ae',
+                BASE_URL: 'http://www.gaveltest.com.ar'
+            },
+            SOC: 'abacus'
+        })
         .run(function ($ionicPlatform, $rootScope, AuthServiceRest) {
             $ionicPlatform.ready(function () {
                 // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -11,8 +25,8 @@ angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
                     StatusBar.styleDefault();
                 }
                 $rootScope.currentUser = null;
-                $rootScope.logout = function() {
-                    AuthServiceRest.logout($rootScope);
+                $rootScope.desloguear = function () {
+                    AuthServiceRest.desloguear($rootScope);
                 };
             });
         })
@@ -44,7 +58,7 @@ angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
                         }
                     })
                     .state('app.proveedor', {
-                        url: "/proveedores/:provedorNombre",
+                        url: "/proveedores/:proveedorId",
                         views: {
                             'tab-proveedores': {
                                 templateUrl: "templates/proveedor.html",
@@ -86,13 +100,6 @@ angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
                                 templateUrl: "templates/tab-mensajes.html",
                                 controller: 'MensajesCtrl'
                             }
-                        }
-                    })
-                    .state('app.logout', {
-                        url: "/logout",
-                        abstract: true,
-                        controller: function ($rootScope, AuthServiceRest) {
-                            AuthServiceRest.logout($rootScope);
                         }
                     });
             // if none of the above states are matched, use this as the fallback

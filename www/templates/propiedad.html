@@ -1,45 +1,39 @@
 <ion-view view-title="Propiedad">
     <ion-nav-buttons side="right">
-        <button class="button button-icon button-clear ion-ios-plus-empty" ng-click="showNewGastoDialog()">
+        <button class="button button-icon button-clear ion-ios-plus-empty" ng-click="mostrarDialogoNuevoGasto()">
             Gasto
         </button>
     </ion-nav-buttons>
     <ion-content>
         <div class="item item-divider">
-            Propiedad <b>{{propiedad.Propiedad.prop_direccion}} <p>({{propiedad.Propiedad.prop_nro_parcela}})</p></b>
+            <h2><b>{{propiedad.Propiedad.prop_direccion}}</b></h2>
         </div>
         <div class="item">
-            Descripción Legal: <b>{{propiedad.Propiedad.prop_descripcion_legal}}</b>
-        </div> 
+            Nro. Parcela <b>{{propiedad.Propiedad.prop_nro_parcela}}</b>
+        </div>
+        <div class="item">
+            Desc. Legal <b>{{propiedad.Propiedad.prop_descripcion_legal}}</b>
+        </div>
         <div class="item">
             Monto Venta <b> U$S {{propiedad.Propiedad.op_monto_venta}}</b>
         </div> 
         <div class="item">
-            Monto Gastos: <b class="monto-rojo"> U$S {{propiedad.Propiedad.op_monto_gastos}}</b>
+            Gastos <b class="monto-rojo">U$S {{propiedad.Propiedad.op_monto_gastos}}</b>
         </div> 
         <div class="item">
-            Monto Ganancias: <b ng-class="propiedad.Propiedad.op_monto_ganancia < 0 ? 'monto-rojo' : 'monto-verde'"> U$S {{propiedad.Propiedad.op_monto_ganancia}}</b>
+            Ganancia <b ng-class="propiedad.Propiedad.op_monto_ganancia < 0 ? 'monto-rojo' : 'monto-verde'">U$S {{propiedad.Propiedad.op_monto_ganancia}}</b>
         </div> 
         <div class="item item-divider">
-            Datos del Remate
+            <h2><b>Remate</b></h2>
         </div>
         <div class="item">
-            Fecha: <b>{{propiedad.Propiedad.rem_fecha}}</b>
+            Fecha <b>{{propiedad.Propiedad.rem_fecha}}</b>
         </div>
         <div class="item">
-            Caso: <b>{{propiedad.Propiedad.rem_caso}}</b>
+            Caso <b>{{propiedad.Propiedad.rem_caso}}</b>
         </div>
         <div class="item">
-            Monto Juicio: <b>{{propiedad.Propiedad.rem_monto_juicio}}</b>
-        </div>
-        <div class="item">
-            Fecha: <b>{{propiedad.Propiedad.rem_fecha}}</b>
-        </div>
-        <div class="item">
-            Caso: <b>{{propiedad.Propiedad.rem_caso}}</b>
-        </div>
-        <div class="item">
-            Monto Juicio: <b>{{propiedad.Propiedad.rem_monto_juicio}}</b>
+            Monto Juicio <b>{{propiedad.Propiedad.rem_monto_juicio}}</b>
         </div>
     </ion-content>
 </ion-view>

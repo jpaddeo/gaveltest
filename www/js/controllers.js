@@ -1,4 +1,4 @@
-angular.module('abacus.controllers', ['firebase', 'ngMap'])
+angular.module('abacus.controllers', ['ngMap'])
         .controller('TabsCtrl', function ($scope, $rootScope) {
             $scope.hideClass = 'ng-hide';
             $scope.showClass = 'ng-show';
@@ -8,99 +8,85 @@ angular.module('abacus.controllers', ['firebase', 'ngMap'])
         })
         .controller('LoginCtrl', function ($scope, $rootScope, AuthServiceRest) {
             $scope.loginUser = {};
-            $scope.addUser = function () {
-                if ($scope.loginUser.email && $scope.loginUser.password) {
-                    AuthServiceRest.createUser($rootScope, $scope.loginUser);
-                    $scope.loginUser = {};
-                }
-            };
-            $scope.doLogin = function () {
+            $scope.loguear = function () {
                 if (empty($rootScope.currentUser)) {
-                    AuthServiceRest.authenticate($rootScope, $scope.loginUser);
+                    AuthServiceRest.autenticar($rootScope, $scope.loginUser);
                     $scope.loginUser = {};
                 }
             };
         })
-        .controller('ProveedoresCtrl', function ($scope, $ionicModal, Proveedor) {
+        .controller('ProveedoresCtrl', function ($scope, $ionicModal, $state, Proveedor) {
             Proveedor.all($scope);
-            $scope.removeProveedor = function (proveedor) {
-                Proveedor.remove($scope, proveedor);
+            $scope.removerProveedor = function (proveedor) {
+                if (Proveedor.remove(proveedor)) {
+                    console.log("Proveedor removido");
+                }
             };
             // Modal de Nuevo Proveedor
             $scope.nuevoProveedorData = {};
-            $ionicModal.fromTemplateUrl('templates/dialogs/new_proveedor.html', {
+            $ionicModal.fromTemplateUrl('templates/dialogs/nuevo_proveedor.html', {
                 scope: $scope
             }).then(function (modal) {
                 $scope.modal = modal;
             });
-            $scope.closeNewProveedor = function () {
+            $scope.cerrarDialogoNuevoProveedor = function () {
                 $scope.modal.hide();
             };
-            $scope.showNewProveedor = function () {
+            $scope.mostrarDialogoNuevoProveedor = function () {
                 $scope.nuevoProveedorData = {};
                 $scope.modal.show();
             };
-            $scope.addProveedor = function () {
-                Proveedor.new($scope, $scope.nuevoProveedorData);
-                $scope.closeNewProveedor();
+            $scope.agregarProveedor = function () {
+                if (Proveedor.new($scope.nuevoProveedorData)) {
+                    $scope.cerrarDialogoNuevoProveedor();
+                    Proveedor.all($scope);
+                }
+            };
+            $scope.irAProveedor = function (proveedorId) {
+                $state.transitionTo("app.proveedor", {proveedorId: proveedorId});
             };
         })
-        .controller('ProveedorCtrl', function ($scope, $stateParams) {
-            $scope.nombre = $stateParams.provedorNombre;
+        .controller('ProveedorCtrl', function ($scope, $stateParams, Proveedor) {
+            Proveedor.get($scope, $stateParams.proveedorId);
         })
-        .controller('PropiedadesCtrl', function ($scope, $ionicActionSheet, Propiedad) {
+        .controller('PropiedadesCtrl', function ($scope, $state, Propiedad) {
             Propiedad.all($scope);
             $scope.actualizarPropiedades = function () {
                 Propiedad.all($scope);
             };
-            $scope.mostrarMenuContextualPropiedad = function () {
-                $ionicActionSheet.show({
-                    buttons: [{text: 'Recargar'}],
-                    titleText: 'Acciones',
-                    cancelText: 'Cancelar',
-                    cancel: function () {},
-                    buttonClicked: function (index) {
-                        switch(index) {
-                            case 0:
-                                Propiedad.all($scope);
-                                break;
-                            default:
-                                break;
-                        }
-                        return true;
-                    }
-                });
-            };
             $scope.reloadPropiedades = function () {
                 Propiedad.all($scope);
             };
-            $scope.removePropiedad = function (propiedadId) {
-                Propiedad.remove(propiedadId);
+            $scope.irAPropiedad = function (propiedadId) {
+                $state.transitionTo("app.propiedad", {propiedadId: propiedadId});
             };
         })
-        .controller('PropiedadCtrl', function ($scope, $stateParams, $ionicModal, Propiedad) {
+        .controller('PropiedadCtrl', function ($scope, $stateParams, $ionicModal, Propiedad, Proveedor, Gasto) {
             Propiedad.get($scope, $stateParams.propiedadId);
+            Proveedor.all($scope);
             // Modal de Nuevo Proveedor
             $scope.nuevoGastoData = {};
-            $ionicModal.fromTemplateUrl('templates/dialogs/new_gasto.html', {
+            $ionicModal.fromTemplateUrl('templates/dialogs/nuevo_gasto.html', {
                 scope: $scope
             }).then(function (modal) {
                 $scope.modal = modal;
             });
-            $scope.closeNewGastoDialog = function () {
+            $scope.cerrarDialogoNuevoGasto = function () {
                 $scope.modal.hide();
             };
-            $scope.showNewGastoDialog = function () {
+            $scope.mostrarDialogoNuevoGasto = function () {
                 $scope.nuevoGastoData = {};
                 $scope.modal.show();
             };
-            $scope.addGasto = function () {
-                Propiedad.addGasto($scope.propiedad.Propiedad.id, $scope.nuevoGastoData);
-                $scope.closeNewGastoDialog();
+            $scope.agregarGasto = function () {
+                if (Gasto.new($scope.nuevoGastoData)) {
+                    $scope.cerrarDialogoNuevoGasto();
+                    Propiedad.get($scope, $scope.propiedad.Propiedad.id);
+                }
             };
         })
-        .controller('MapaCtrl', function ($scope, $ionicPopup, Propiedad) {
-            $scope.defaultConfig = _GLOBAL_CONFIG.GEO.DEFAULT_CONFIG;
+        .controller('MapaCtrl', function ($scope, $ionicPopup, Propiedad, GLOBAL_CONFIG) {
+            $scope.defaultConfig = GLOBAL_CONFIG.GEO.DEFAULT_CONFIG;
             Propiedad.all($scope);
             $scope.$on('mapInitialized', function (event, map) {
                 $scope.map = map;

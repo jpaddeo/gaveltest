@@ -15,8 +15,12 @@
     <ion-tab title="Mapa" icon-off="ion-ios-location-outline" icon-on="ion-ios-location" href="#/app/mapa" class="{{(currentUser() ? showClass : hideClass)}}">
         <ion-nav-view name="tab-mapa"></ion-nav-view>
     </ion-tab>
-    <!-- Chats Tab -->
+    <!-- Logout -->
+    <ion-tab title="Salir" icon-off="ion-log-out" icon-on="ion-log-out" ng-click="desloguear()" class="{{(currentUser() ? showClass : hideClass)}}">
+    </ion-tab>
+    <!-- Chats Tab 
     <ion-tab title="Mensajes" icon-off="ion-ios-chatboxes-outline" icon-on="ion-ios-chatboxes" href="#/app/mensajes" class="{{(currentUser() ? showClass : hideClass)}}">
         <ion-nav-view name="tab-mensajes"></ion-nav-view>
     </ion-tab>
+    -->
 </ion-tabs>

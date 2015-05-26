@@ -1,67 +1,13 @@
 angular.module('abacus.services', [])
-        .factory('AuthService', function ($firebaseAuth, $ionicLoading, $state) {
+        .factory('AuthServiceRest', function ($http, $ionicLoading, $state, GLOBAL_CONFIG) {
             return {
-                authenticate: function ($rootScope, user) {
-                    var _ref = new Firebase(_GLOBAL_CONFIG.DB_PATH);
-                    var _auth = $firebaseAuth(_ref);
-                    $ionicLoading.show({template: 'Autenticando...'});
-                    _auth.$authWithPassword({
-                        email: user.email,
-                        password: user.password
-                    }).then(function (authData) {
-                        _ref.child("users").child(authData.uid).once('value', function (snapshot) {
-                            $rootScope.currentUser = snapshot.val();
-                            $ionicLoading.hide();
-                            $state.transitionTo("app.propiedades");
-                        });
-                    }).catch(function (error) {
-                        $ionicLoading.hide();
-                        alert("Falló la autenticación:" + error.message);
-                    });
-                },
-                createUser: function ($rootScope, pUser) {
-                    var _ref = new Firebase(_GLOBAL_CONFIG.DB_PATH);
-                    var _auth = $firebaseAuth(_ref);
-                    $ionicLoading.show({template: 'Registrando...'});
-                    _auth.$createUser({
-                        email: pUser.email,
-                        password: pUser.password
-                    }).then(function (authData) {
-                        alert("Usuario creado satisfactoriamente!");
-                        _ref.child("users").child(authData.uid).set({
-                            email: pUser.email,
-                            nombre: pUser.nombre
-                        });
-                        $rootScope.currentUser = pUser;
-                        $ionicLoading.hide();
-                        $state.transitionTo("app.propiedades");
-                    }).catch(function (error) {
-                        $ionicLoading.hide();
-                        alert("Falló la creación delusuario:" + error.message);
-                    });
-                },
-                logout: function ($rootScope) {
-                    var _ref = new Firebase(_GLOBAL_CONFIG.DB_PATH);
-                    var _auth = $firebaseAuth(_ref);
-                    $ionicLoading.show({template: 'Deslogueando...'});
-                    if ($rootScope) {
-                        $rootScope.currentUser = null;
-                    }
-                    _auth.$unauth();
-                    $ionicLoading.hide();
-                    $state.transitionTo("app.login");
-                }
-            };
-        })
-        .factory('AuthServiceRest', function ($http, $ionicLoading, $state) {
-            return {
-                authenticate: function ($rootScope, user) {
+                autenticar: function ($rootScope, user) {
                     var request = {
                         method: 'POST',
-                        params: {key: _GLOBAL_CONFIG.REST_API.KEY},
-                        data: {username: user.email, password: user.password}
+                        params: {key: GLOBAL_CONFIG.REST_API.KEY},
+                        data: {username: user.username, password: user.password}
                     };
-                    request.url = _GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_users/validar";
+                    request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_users/validar";
                     $ionicLoading.show({template: 'Autenticando...'});
                     $http(request).success(function (data) {
                         $ionicLoading.hide();
@@ -75,21 +21,7 @@ angular.module('abacus.services', [])
                         }
                     });
                 },
-                createUser: function ($rootScope, user) {
-                    var request = {
-                        method: 'POST',
-                        url: _GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_users.json",
-                        params: {key: _GLOBAL_CONFIG.REST_API.KEY},
-                        data: {firstname: user.nombre, lastname: user.nombre, email: user.email, username: user.email.substr(0, user.email.indexOf('@')), password: user.password, confirm_password: user.password, estado: 'Activo'}
-                    };
-                    $ionicLoading.show({template: 'Registrando...'});
-                    $http(request).success(function (data) {
-                        $ionicLoading.hide();
-                        $rootScope.currentUser = user;
-                        $state.transitionTo("app.propiedades");
-                    });
-                },
-                logout: function ($rootScope) {
+                desloguear: function ($rootScope) {
                     $ionicLoading.show({template: 'Deslogueando...'});
                     if ($rootScope) {
                         $rootScope.currentUser = null;
@@ -99,62 +31,37 @@ angular.module('abacus.services', [])
                 }
             };
         })
-        .factory('ProveedorFB', function ($firebaseArray) {
-            var refProveedores = new Firebase(_GLOBAL_CONFIG.DB_PATH + "/proveedores");
-            var proveedores = $firebaseArray(refProveedores);
-
-            return {
-                all: function () {
-                    return proveedores;
-                },
-                new : function (proveedor) {
-                    proveedores.$add(proveedor);
-                },
-                remove: function (proveedor) {
-                    proveedores.$remove(proveedor);
-                },
-                get: function (proveedorTelefono) {
-                    for (var i = 0; i < proveedores.length; i++) {
-                        if (proveedores[i].telefono === proveedorTelefono) {
-                            return proveedores[i];
-                        }
-                    }
-                    return null;
-                }
-            };
-        })
-        .factory('Proveedor', function ($http, $ionicLoading, $window) {
+        .factory('Proveedor', function ($http, $ionicLoading, GLOBAL_CONFIG) {
             var request = {
                 method: 'GET',
-                params: {key: _GLOBAL_CONFIG.REST_API.KEY}
+                params: {key: GLOBAL_CONFIG.REST_API.KEY}
             };
             return {
                 all: function ($scope) {
-                    request.url = _GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_proveedores.json";
+                    request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_proveedores.json";
                     $ionicLoading.show({template: 'Cargando...'});
                     $http(request).success(function (data) {
                         $ionicLoading.hide();
                         $scope.proveedores = data.proveedores;
                     });
                 },
-                new : function ($scope, proveedor) {
+                new : function (proveedor) {
                     request.method = 'POST';
-                    request.url = _GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_proveedores.json";
+                    request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_proveedores.json";
                     request.data = proveedor;
                     $http(request).success(function (data) {
-                        $scope.closeNewProveedor();
-                        $window.location.reload();
+                        return true;
                     });
                 },
-                remove: function ($scope, proveedorId) {
+                remove: function (proveedorId) {
                     request.method = 'DELETE';
-                    request.url = _GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_proveedores/" + proveedorId + ".json";
+                    request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_proveedores/" + proveedorId + ".json";
                     $http(request).success(function (data) {
-                        $window.location.reload();
+                        return true;
                     });
                 },
                 get: function ($scope, proveedorId) {
-                    request.url = _GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_proveedores/" + proveedorId + ".json";
+                    request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_proveedores/" + proveedorId + ".json";
                     $ionicLoading.show({template: 'Cargando...'});
                     $http(request).success(function (data) {
                         $ionicLoading.hide();
@@ -163,14 +70,14 @@ angular.module('abacus.services', [])
                 }
             };
         })
-        .factory('Propiedad', function ($http, $ionicLoading, $location) {
+        .factory('Propiedad', function ($http, $ionicLoading, GLOBAL_CONFIG) {
             var request = {
                 method: 'GET',
-                params: {key: _GLOBAL_CONFIG.REST_API.KEY}
+                params: {key: GLOBAL_CONFIG.REST_API.KEY}
             };
             return {
                 all: function ($scope) {
-                    request.url = _GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_propiedades.json";
+                    request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_propiedades.json";
                     $ionicLoading.show({template: 'Cargando...'});
                     $http(request).success(function (data) {
                         $ionicLoading.hide();
@@ -179,27 +86,94 @@ angular.module('abacus.services', [])
                         $scope.$broadcast('scroll.refreshComplete');
                     });
                 },
-                new : function (proveedor) {
-                    //proveedores.$add(proveedor);
-                },
-                remove: function (propiedadId) {
-                    request.method = 'DELETE';
-                    request.url = _GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_propiedades/" + propiedadId + ".json";
-                    $http(request).success(function (data) {
-                        $location.reload();
-                    });
-                    //proveedores.$remove(proveedor);
-                },
                 get: function ($scope, propiedadId) {
-                    request.url = _GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_propiedades/" + propiedadId + ".json";
+                    request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_propiedades/" + propiedadId + ".json";
                     $ionicLoading.show({template: 'Cargando...'});
                     $http(request).success(function (data) {
                         $ionicLoading.hide();
                         $scope.propiedad = data.propiedad;
                     });
-                },
-                addGasto: function (propiedadId, gasto) {
-                    // TODO:
                 }
             };
-        });
+        })
+        .factory('Gasto', function ($http, $ionicLoading, GLOBAL_CONFIG) {
+            var request = {
+                method: 'GET',
+                params: {key: GLOBAL_CONFIG.REST_API.KEY}
+            };
+            return {
+                all: function ($scope) {
+                    request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_gastos.json";
+                    $ionicLoading.show({template: 'Cargando...'});
+                    $http(request).success(function (data) {
+                        $ionicLoading.hide();
+                        $scope.gastos = data.gastos;
+                    }).finally(function () {
+                        $scope.$broadcast('scroll.refreshComplete');
+                    });
+                },
+                new : function (gasto) {
+                    request.method = 'POST';
+                    request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_gastos.json";
+                    request.data = gasto;
+                    $http(request).success(function (data) {
+                        return true;
+                    });
+                },
+                remove: function (gastoId) {
+                    request.method = 'DELETE';
+                    request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_gastos/" + gastoId + ".json";
+                    $http(request).success(function (data) {
+                        return true;
+                    });
+                },
+                get: function ($scope, gastoId) {
+                    request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_gastos/" + gastoId + ".json";
+                    $ionicLoading.show({template: 'Cargando...'});
+                    $http(request).success(function (data) {
+                        $ionicLoading.hide();
+                        $scope.gasto = data.gasto;
+                    });
+                }
+            };
+        })
+        .directive('ionSearch', function () {
+            return {
+                restrict: 'E',
+                replace: true,
+                scope: {
+                    getData: '&source',
+                    model: '=?',
+                    search: '=?filter'
+                },
+                link: function (scope, element, attrs) {
+                    attrs.minLength = attrs.minLength || 0;
+                    scope.placeholder = attrs.placeholder || '';
+                    scope.search = {value: ''};
+
+                    if (attrs.class)
+                        element.addClass(attrs.class);
+
+                    if (attrs.source) {
+                        scope.$watch('search.value', function (newValue, oldValue) {
+                            if (newValue.length > attrs.minLength) {
+                                scope.getData({str: newValue}).then(function (results) {
+                                    scope.model = results;
+                                });
+                            } else {
+                                scope.model = [];
+                            }
+                        });
+                    }
+
+                    scope.clearSearch = function () {
+                        scope.search.value = '';
+                    };
+                },
+                template: '<div class="item-input-wrapper">' +
+                        '<i class="icon ion-ios-search-strong"></i>' +
+                        '<input type="search" placeholder="{{placeholder}}" ng-model="search.value">' +
+                        '<i ng-if="search.value.length > 0" ng-click="clearSearch()" class="icon ion-close"></i>' +
+                        '</div>'
+            };
+        });        
