@@ -9,7 +9,7 @@ angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
             },
             REST_API: {
                 KEY: '890d68ad1ef38782d8f92ac77fb4862cc5c013ae',
-                BASE_URL: 'http://auctions'
+                BASE_URL: 'http://www.gaveltest.com.ar'
             },
             SOC: 'abacus'
         })
