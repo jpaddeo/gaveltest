@@ -30,6 +30,7 @@ angular.module('abacus.controllers', ['ngMap'])
                 $scope.modal = modal;
             });
             $scope.cerrarDialogoNuevoProveedor = function () {
+                $scope.nuevoProveedorData = {};
                 $scope.modal.hide();
             };
             $scope.mostrarDialogoNuevoProveedor = function () {
@@ -37,13 +38,13 @@ angular.module('abacus.controllers', ['ngMap'])
                 $scope.modal.show();
             };
             $scope.agregarProveedor = function () {
-                if (Proveedor.new($scope.nuevoProveedorData)) {
-                    $scope.cerrarDialogoNuevoProveedor();
-                    Proveedor.all($scope);
-                }
+                Proveedor.new($scope, $scope.nuevoProveedorData);
             };
             $scope.irAProveedor = function (proveedorId) {
                 $state.transitionTo("app.proveedor", {proveedorId: proveedorId});
+            };
+            $scope.recargarProveedores = function () {
+                Proveedor.all($scope);
             };
         })
         .controller('ProveedorCtrl', function ($scope, $stateParams, Proveedor) {
@@ -51,10 +52,7 @@ angular.module('abacus.controllers', ['ngMap'])
         })
         .controller('PropiedadesCtrl', function ($scope, $state, Propiedad) {
             Propiedad.all($scope);
-            $scope.actualizarPropiedades = function () {
-                Propiedad.all($scope);
-            };
-            $scope.reloadPropiedades = function () {
+            $scope.recargarPropiedades = function () {
                 Propiedad.all($scope);
             };
             $scope.irAPropiedad = function (propiedadId) {
@@ -72,6 +70,7 @@ angular.module('abacus.controllers', ['ngMap'])
                 $scope.modal = modal;
             });
             $scope.cerrarDialogoNuevoGasto = function () {
+                $scope.nuevoGastoData = {};
                 $scope.modal.hide();
             };
             $scope.mostrarDialogoNuevoGasto = function () {
@@ -79,10 +78,10 @@ angular.module('abacus.controllers', ['ngMap'])
                 $scope.modal.show();
             };
             $scope.agregarGasto = function () {
-                if (Gasto.new($scope.nuevoGastoData)) {
-                    $scope.cerrarDialogoNuevoGasto();
-                    Propiedad.get($scope, $scope.propiedad.Propiedad.id);
-                }
+                Gasto.new($scope, $scope.nuevoGastoData);
+            };
+            $scope.recargarPropiedad = function () {
+                Propiedad.get($scope, $scope.propiedad.Propiedad.id);
             };
         })
         .controller('MapaCtrl', function ($scope, $ionicPopup, Propiedad, GLOBAL_CONFIG) {

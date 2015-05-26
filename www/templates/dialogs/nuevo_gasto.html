@@ -8,7 +8,6 @@
     <ion-content>
         <form ng-submit="agregarGasto()">
             <div class="list">
-                <input type="hidden" ng-model="nuevoGastoData.propiedad_id" value="{{propiedad.Propiedad.id}}">
                 <label class="item item-input item-select">
                     <span class="input-label">Proveedor</span>
                     <select ng-model="nuevoGastoData.proveedor_id">
@@ -17,7 +16,7 @@
                 </label>
                 <label class="item item-input">
                     <span class="input-label">Fecha</span>
-                    <input type="date" ng-model="nuevoGastoData.fecha">
+                    <input type="text" ng-model="nuevoGastoData.fecha">
                 </label>
                 <label class="item item-input item-select">
                     <span class="input-label">Referencia</span>

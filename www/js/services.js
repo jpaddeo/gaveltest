@@ -38,19 +38,26 @@ angular.module('abacus.services', [])
             };
             return {
                 all: function ($scope) {
-                    request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_proveedores.json";
+                    request.method = 'GET',
+                            request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_proveedores.json";
                     $ionicLoading.show({template: 'Cargando...'});
                     $http(request).success(function (data) {
                         $ionicLoading.hide();
                         $scope.proveedores = data.proveedores;
+                    }).finally(function () {
+                        $scope.$broadcast('scroll.refreshComplete');
                     });
                 },
-                new : function (proveedor) {
+                new : function ($scope, proveedorData) {
                     request.method = 'POST';
                     request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_proveedores.json";
-                    request.data = proveedor;
+                    request.data = proveedorData;
                     $http(request).success(function (data) {
-                        return true;
+                        if (data.message === "created") {
+                            $scope.cerrarDialogoNuevoProveedor();
+                        } else {
+                            alert(data.message);
+                        }
                     });
                 },
                 remove: function (proveedorId) {
@@ -61,7 +68,8 @@ angular.module('abacus.services', [])
                     });
                 },
                 get: function ($scope, proveedorId) {
-                    request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_proveedores/" + proveedorId + ".json";
+                    request.method = 'GET',
+                            request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_proveedores/" + proveedorId + ".json";
                     $ionicLoading.show({template: 'Cargando...'});
                     $http(request).success(function (data) {
                         $ionicLoading.hide();
@@ -77,7 +85,8 @@ angular.module('abacus.services', [])
             };
             return {
                 all: function ($scope) {
-                    request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_propiedades.json";
+                    request.method = 'GET',
+                            request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_propiedades.json";
                     $ionicLoading.show({template: 'Cargando...'});
                     $http(request).success(function (data) {
                         $ionicLoading.hide();
@@ -103,7 +112,8 @@ angular.module('abacus.services', [])
             };
             return {
                 all: function ($scope) {
-                    request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_gastos.json";
+                    request.method = 'GET',
+                            request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_gastos.json";
                     $ionicLoading.show({template: 'Cargando...'});
                     $http(request).success(function (data) {
                         $ionicLoading.hide();
@@ -112,12 +122,18 @@ angular.module('abacus.services', [])
                         $scope.$broadcast('scroll.refreshComplete');
                     });
                 },
-                new : function (gasto) {
+                new : function ($scope, gasto) {
+                    gasto.propiedad_id = $scope.propiedad.Propiedad.id;
                     request.method = 'POST';
                     request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_gastos.json";
                     request.data = gasto;
                     $http(request).success(function (data) {
-                        return true;
+                        if (data.message === "created") {
+                            $scope.cerrarDialogoNuevoGasto();
+                            $scope.recargarPropiedad();
+                        } else {
+                            alert(data.message);
+                        }
                     });
                 },
                 remove: function (gastoId) {
@@ -128,7 +144,8 @@ angular.module('abacus.services', [])
                     });
                 },
                 get: function ($scope, gastoId) {
-                    request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_gastos/" + gastoId + ".json";
+                    request.method = 'GET',
+                            request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_gastos/" + gastoId + ".json";
                     $ionicLoading.show({template: 'Cargando...'});
                     $http(request).success(function (data) {
                         $ionicLoading.hide();
