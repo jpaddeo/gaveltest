@@ -93,6 +93,15 @@ angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
                             }
                         }
                     })
+                    .state('app.relevamiento', {
+                        url: "/relevamiento",
+                        views: {
+                            'tab-relevamiento': {
+                                templateUrl: "templates/tab-relevamiento.html",
+                                controller: 'RelevamientoCtrl'
+                            }
+                        }
+                    })
                     .state('app.mensajes', {
                         url: "/mensajes",
                         views: {

@@ -1,0 +1,205 @@
+<ion-view view-title="Relevamiento">    
+    <ion-content>
+        <div class="item">
+            <label class="item item-input item-select">
+                <div class="input-label">Propiedad</div>
+                <select ng-model="relevamiento.propiedad_id">
+                    <option ng-repeat="propiedad in propiedades" value="{{propiedad.Proveedor.id}}">{{propiedad.Propiedad.prop_direccion}}</option>
+                </select>
+            </label>
+        </div>
+        <div class="item">
+            <ion-toggle ng-model="relevamiento.conexion_energia" toggle-class="toggle-calm">Conexión Energía</ion-toggle>
+        </div>
+        <div class="item">
+            <ion-toggle ng-model="relevamiento.conexion_agua" toggle-class="toggle-calm">Conexión Agua</ion-toggle>
+        </div>
+        <div class="item item-divider">
+            <h2><b>Aire Acondicionado</b></h2>
+        </div>
+        <div class="item item-input">
+            <ion-toggle ng-model="relevamiento.ac_funciona" toggle-class="toggle-calm">Funciona?</ion-toggle>
+        </div>
+        <div class="item item-input">
+            <ion-radio ng-model="relevamiento.ac_estado" ng-value="'B'">B</ion-radio>
+            <ion-radio ng-model="relevamiento.ac_estado" ng-value="'R'">R</ion-radio>
+            <ion-radio ng-model="relevamiento.ac_estado" ng-value="'M'">M</ion-radio>
+        </div>
+        <div class="item item-input">
+            <label class="item item-input">
+                <input type="text" ng-model="relevamiento.ac_costo" placeholder="Costo">
+            </label>
+        </div>
+        <div class="item item-divider">
+            <h2><b>Termotanque</b></h2>
+        </div>
+        <div class="item item-input">
+            <ion-toggle ng-model="relevamiento.termo_funciona" toggle-class="toggle-calm">Funciona?</ion-toggle>
+        </div>
+        <div class="item item-input">
+            <ion-radio ng-model="relevamiento.termo_estado" ng-value="'B'">B</ion-radio>
+            <ion-radio ng-model="relevamiento.termo_estado" ng-value="'R'">R</ion-radio>
+            <ion-radio ng-model="relevamiento.termo_estado" ng-value="'M'">M</ion-radio>
+        </div>
+        <div class="item item-input">
+            <label class="item item-input">
+                <input type="text" ng-model="relevamiento.termo_costo" placeholder="Costo">
+            </label>
+        </div>
+        <div class="item item-divider">
+            <h2><b>Tablero Luces</b></h2>
+        </div>
+        <div class="item item-input">
+            <ion-toggle ng-model="relevamiento.tablero_funciona" toggle-class="toggle-calm">Funciona?</ion-toggle>
+        </div>
+        <div class="item item-input">
+            <ion-radio ng-model="relevamiento.tablero_estado" ng-value="'B'">B</ion-radio>
+            <ion-radio ng-model="relevamiento.tablero_estado" ng-value="'R'">R</ion-radio>
+            <ion-radio ng-model="relevamiento.tablero_estado" ng-value="'M'">M</ion-radio>
+        </div>
+        <div class="item item-input">
+            <label class="item item-input">
+                <input type="text" ng-model="relevamiento.tablero_costo" placeholder="Costo">
+            </label>
+        </div>
+        <div class="item item-divider">
+            <h2><b>Portón Garage</b></h2>
+        </div>
+        <div class="item item-input">
+            <ion-toggle ng-model="relevamiento.porton_funciona" toggle-class="toggle-calm">Funciona?</ion-toggle>
+        </div>
+        <div class="item item-input">
+            <ion-radio ng-model="relevamiento.porton_estado" ng-value="'B'">B</ion-radio>
+            <ion-radio ng-model="relevamiento.porton_estado" ng-value="'R'">R</ion-radio>
+            <ion-radio ng-model="relevamiento.porton_estado" ng-value="'M'">M</ion-radio>
+        </div>
+        <div class="item item-input">
+            <label class="item item-input">
+                <input type="text" ng-model="relevamiento.porton_costo" placeholder="Costo">
+            </label>
+        </div>
+        <div class="item item-divider">
+            <h2><b>Triturador</b></h2>
+        </div>
+        <div class="item item-input">
+            <ion-toggle ng-model="relevamiento.triturador_funciona" toggle-class="toggle-calm">Funciona?</ion-toggle>
+        </div>
+        <div class="item item-input">
+            <ion-radio ng-model="relevamiento.triturador_estado" ng-value="'B'">B</ion-radio>
+            <ion-radio ng-model="relevamiento.triturador_estado" ng-value="'R'">R</ion-radio>
+            <ion-radio ng-model="relevamiento.triturador_estado" ng-value="'M'">M</ion-radio>
+        </div>
+        <div class="item item-input">
+            <label class="item item-input">
+                <input type="text" ng-model="relevamiento.triturador_costo" placeholder="Costo">
+            </label>
+        </div>
+        <div class="item item-divider">
+            <h2><b>Heladera</b></h2>
+        </div>
+        <div class="item item-input">
+            <ion-toggle ng-model="relevamiento.heladera_funciona" toggle-class="toggle-calm">Funciona?</ion-toggle>
+        </div>
+        <div class="item item-input">
+            <ion-radio ng-model="relevamiento.heladera_estado" ng-value="'B'">B</ion-radio>
+            <ion-radio ng-model="relevamiento.heladera_estado" ng-value="'R'">R</ion-radio>
+            <ion-radio ng-model="relevamiento.heladera_estado" ng-value="'M'">M</ion-radio>
+        </div>
+        <div class="item item-input">
+            <label class="item item-input">
+                <input type="text" ng-model="relevamiento.heladera_costo" placeholder="Costo">
+            </label>
+        </div>
+        <div class="item item-divider">
+            <h2><b>Cocina</b></h2>
+        </div>
+        <div class="item item-input">
+            <ion-toggle ng-model="relevamiento.cocina_funciona" toggle-class="toggle-calm">Funciona?</ion-toggle>
+        </div>
+        <div class="item item-input">
+            <ion-radio ng-model="relevamiento.cocina_estado" ng-value="'B'">B</ion-radio>
+            <ion-radio ng-model="relevamiento.cocina_estado" ng-value="'R'">R</ion-radio>
+            <ion-radio ng-model="relevamiento.cocina_estado" ng-value="'M'">M</ion-radio>
+        </div>
+        <div class="item item-input">
+            <label class="item item-input">
+                <input type="text" ng-model="relevamiento.cocina_costo" placeholder="Costo">
+            </label>
+        </div>
+        <div class="item item-divider">
+            <h2><b>Lavavajilla</b></h2>
+        </div>
+        <div class="item item-input">
+            <ion-toggle ng-model="relevamiento.lavavajilla_funciona" toggle-class="toggle-calm">Funciona?</ion-toggle>
+        </div>
+        <div class="item item-input">
+            <ion-radio ng-model="relevamiento.lavavajilla_estado" ng-value="'B'">B</ion-radio>
+            <ion-radio ng-model="relevamiento.lavavajilla_estado" ng-value="'R'">R</ion-radio>
+            <ion-radio ng-model="relevamiento.lavavajilla_estado" ng-value="'M'">M</ion-radio>
+        </div>
+        <div class="item item-input">
+            <label class="item item-input">
+                <input type="text" ng-model="relevamiento.lavavajilla_costo" placeholder="Costo">
+            </label>
+        </div>
+        <div class="item item-divider">
+            <h2><b>Microondas</b></h2>
+        </div>
+        <div class="item item-input">
+            <ion-toggle ng-model="relevamiento.microondas_funciona" toggle-class="toggle-calm">Funciona?</ion-toggle>
+        </div>
+        <div class="item item-input">
+            <ion-radio ng-model="relevamiento.microondas_estado" ng-value="'B'">B</ion-radio>
+            <ion-radio ng-model="relevamiento.microondas_estado" ng-value="'R'">R</ion-radio>
+            <ion-radio ng-model="relevamiento.microondas_estado" ng-value="'M'">M</ion-radio>
+        </div>
+        <div class="item item-input">
+            <label class="item item-input">
+                <input type="text" ng-model="relevamiento.microondas_costo" placeholder="Costo">
+            </label>
+        </div>
+        <div class="item item-divider">
+            <h2><b>Lavarropa</b></h2>
+        </div>
+        <div class="item item-input">
+            <ion-toggle ng-model="relevamiento.lavarropa_funciona" toggle-class="toggle-calm">Funciona?</ion-toggle>
+        </div>
+        <div class="item item-input">
+            <ion-radio ng-model="relevamiento.lavarropa_estado" ng-value="'B'">B</ion-radio>
+            <ion-radio ng-model="relevamiento.lavarropa_estado" ng-value="'R'">R</ion-radio>
+            <ion-radio ng-model="relevamiento.lavarropa_estado" ng-value="'M'">M</ion-radio>
+        </div>
+        <div class="item item-input">
+            <label class="item item-input">
+                <input type="text" ng-model="relevamiento.lavarropa_costo" placeholder="Costo">
+            </label>
+        </div>
+        <div class="item item-divider">
+            <h2><b>Secarropa</b></h2>
+        </div>
+        <div class="item item-input">
+            <ion-toggle ng-model="relevamiento.secarropa_funciona" toggle-class="toggle-calm">Funciona?</ion-toggle>
+        </div>
+        <div class="item item-input">
+            <ion-radio ng-model="relevamiento.secarropa_estado" ng-value="'B'">B</ion-radio>
+            <ion-radio ng-model="relevamiento.secarropa_estado" ng-value="'R'">R</ion-radio>
+            <ion-radio ng-model="relevamiento.secarropa_estado" ng-value="'M'">M</ion-radio>
+        </div>
+        <div class="item item-input">
+            <label class="item item-input">
+                <input type="text" ng-model="relevamiento.secarropa_costo" placeholder="Costo">
+            </label>
+        </div>
+        <div class="item item-divider">
+            <h2><b>Estado General</b></h2>
+        </div>        
+        <div class="item item-input">
+            <label class="item item-input">
+                <textarea ng-model="relevamiento.observaciones" placeholder="Observaciones"></textarea>
+            </label>
+        </div>
+        <div class="item">
+            <button class="button button-full ion-ios-plus-outline button-balanced" ng-click="grabarRelevamiento()">Grabar</button>
+        </div>
+    </ion-content>
+</ion-view>

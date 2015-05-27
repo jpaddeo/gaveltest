@@ -15,6 +15,10 @@
     <ion-tab title="Mapa" icon-off="ion-ios-location-outline" icon-on="ion-ios-location" href="#/app/mapa" class="{{(currentUser() ? showClass : hideClass)}}">
         <ion-nav-view name="tab-mapa"></ion-nav-view>
     </ion-tab>
+    <!-- Relevamiento Tab -->
+    <ion-tab title="Relevamiento" icon-off="ion-ios-list-outline" icon-on="ion-ios-list" href="#/app/relevamiento" class="{{(currentUser() ? showClass : hideClass)}}">
+        <ion-nav-view name="tab-relevamiento"></ion-nav-view>
+    </ion-tab>
     <!-- Logout -->
     <ion-tab title="Salir" icon-off="ion-log-out" icon-on="ion-log-out" ng-click="desloguear()" class="{{(currentUser() ? showClass : hideClass)}}">
     </ion-tab>
