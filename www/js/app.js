@@ -8,7 +8,7 @@ angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
                 }
             },
             REST_API: {
-                KEY: '890d68ad1ef38782d8f92ac77fb4862cc5c013ae',
+                KEY: '228ca5f35c5713d6ba4b9969f285b772fea09528',
                 BASE_URL: 'http://www.gaveltest.com.ar'
             },
             SOC: 'abacus'
