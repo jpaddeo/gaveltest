@@ -1,0 +1,14 @@
+<ion-view view-title="Gastos">
+    <ion-content>
+        <div class="list" ng-repeat="(propiedad, reporte_gasto) in reporte_gastos">
+            <div class="item item-divider">
+                {{((propiedad === "") ? "Sociedad" : propiedad)}}
+                <span class="item-note"><b>{{((propiedad === "Total") ? "$ " + reporte_gasto : "")}}</b></span>
+            </div>
+            <div class="item" ng-repeat="(referencia, monto) in reporte_gasto">
+                {{referencia}}
+                <span class="item-note"><b>$ {{monto}}</b></span>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

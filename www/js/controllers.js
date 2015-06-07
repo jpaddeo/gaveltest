@@ -136,6 +136,6 @@ angular.module('abacus.controllers', ['ngMap'])
                 console.log($scope.relevamiento);
             };
         })
-        .controller('MensajesCtrl', function () {
-
+        .controller('GastosCtrl', function ($scope, Gasto) {
+            Gasto.reporte($scope);
         });

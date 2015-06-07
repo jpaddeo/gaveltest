@@ -38,8 +38,8 @@ angular.module('abacus.services', [])
             };
             return {
                 all: function ($scope) {
-                    request.method = 'GET',
-                            request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_proveedores.json";
+                    request.method = 'GET';
+                    request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_proveedores.json";
                     $ionicLoading.show({template: 'Cargando...'});
                     $http(request).success(function (data) {
                         $ionicLoading.hide();
@@ -85,8 +85,8 @@ angular.module('abacus.services', [])
             };
             return {
                 all: function ($scope) {
-                    request.method = 'GET',
-                            request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_propiedades.json";
+                    request.method = 'GET';
+                    request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_propiedades.json";
                     $ionicLoading.show({template: 'Cargando...'});
                     $http(request).success(function (data) {
                         $ionicLoading.hide();
@@ -112,8 +112,8 @@ angular.module('abacus.services', [])
             };
             return {
                 all: function ($scope) {
-                    request.method = 'GET',
-                            request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_gastos.json";
+                    request.method = 'GET';
+                    request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_gastos.json";
                     $ionicLoading.show({template: 'Cargando...'});
                     $http(request).success(function (data) {
                         $ionicLoading.hide();
@@ -144,12 +144,22 @@ angular.module('abacus.services', [])
                     });
                 },
                 get: function ($scope, gastoId) {
-                    request.method = 'GET',
-                            request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_gastos/" + gastoId + ".json";
+                    request.method = 'GET';
+                    request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_gastos/" + gastoId + ".json";
                     $ionicLoading.show({template: 'Cargando...'});
                     $http(request).success(function (data) {
                         $ionicLoading.hide();
                         $scope.gasto = data.gasto;
+                    });
+                },
+                reporte: function ($scope) {
+                    request.method = 'GET';
+                    request.params = {};
+                    request.url = GLOBAL_CONFIG.REST_API.BASE_URL + "/rest_gastos/ajax_get_reporte_propiedad_referencia/" + GLOBAL_CONFIG.REST_API.KEY;
+                    $ionicLoading.show({template: 'Cargando...'});
+                    $http(request).success(function (data) {
+                        $ionicLoading.hide();
+                        $scope.reporte_gastos = data;
                     });
                 }
             };

@@ -102,12 +102,12 @@ angular.module('abacus', ['ionic', 'abacus.controllers', 'abacus.services'])
                             }
                         }
                     })
-                    .state('app.mensajes', {
-                        url: "/mensajes",
+                    .state('app.gastos', {
+                        url: "/gastos",
                         views: {
-                            'tab-mensajes': {
-                                templateUrl: "templates/tab-mensajes.html",
-                                controller: 'MensajesCtrl'
+                            'tab-gastos': {
+                                templateUrl: "templates/tab-gastos.html",
+                                controller: 'GastosCtrl'
                             }
                         }
                     });

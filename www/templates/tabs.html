@@ -7,9 +7,9 @@
     <ion-tab title="Propiedades" icon-off="ion-ios-home-outline" icon-on="ion-ios-home" href="#/app/propiedades" class="{{(currentUser() ? showClass : hideClass)}}">
         <ion-nav-view name="tab-propiedades"></ion-nav-view>
     </ion-tab>
-    <!-- Proveedores Tab -->
-    <ion-tab title="Proveedores" icon-off="ion-ios-briefcase-outline" icon-on="ion-ios-briefcase" href="#/app/proveedores" class="{{(currentUser() ? showClass : hideClass)}}">
-        <ion-nav-view name="tab-proveedores"></ion-nav-view>
+    <!-- Gastos Tab -->
+    <ion-tab title="Gastos" icon-off="ion-cash" icon-on="ion-cash" href="#/app/gastos" class="{{(currentUser() ? showClass : hideClass)}}">
+        <ion-nav-view name="tab-gastos"></ion-nav-view>
     </ion-tab>
     <!-- Mapa de Propiedades -->
     <ion-tab title="Mapa" icon-off="ion-ios-location-outline" icon-on="ion-ios-location" href="#/app/mapa" class="{{(currentUser() ? showClass : hideClass)}}">
@@ -19,12 +19,11 @@
     <ion-tab title="Relevamiento" icon-off="ion-ios-list-outline" icon-on="ion-ios-list" href="#/app/relevamiento" class="{{(currentUser() ? showClass : hideClass)}}">
         <ion-nav-view name="tab-relevamiento"></ion-nav-view>
     </ion-tab>
+    <!-- Proveedores Tab -->
+    <ion-tab title="Proveedores" icon-off="ion-ios-briefcase-outline" icon-on="ion-ios-briefcase" href="#/app/proveedores" class="{{(currentUser() ? showClass : hideClass)}}">
+        <ion-nav-view name="tab-proveedores"></ion-nav-view>
+    </ion-tab>
     <!-- Logout -->
     <ion-tab title="Salir" icon-off="ion-log-out" icon-on="ion-log-out" ng-click="desloguear()" class="{{(currentUser() ? showClass : hideClass)}}">
     </ion-tab>
-    <!-- Chats Tab 
-    <ion-tab title="Mensajes" icon-off="ion-ios-chatboxes-outline" icon-on="ion-ios-chatboxes" href="#/app/mensajes" class="{{(currentUser() ? showClass : hideClass)}}">
-        <ion-nav-view name="tab-mensajes"></ion-nav-view>
-    </ion-tab>
-    -->
 </ion-tabs>
