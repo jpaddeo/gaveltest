@@ -2,7 +2,7 @@
     <ion-content scroll="false">
         <div class="mapWrap"  data-tap-disabled="true">
             <map center="{{defaultConfig.POSITION}}" zoom="{{defaultConfig.ZOOM}}"> 
-                <marker ng-repeat="propiedad in propiedades" position="{{propiedad.Propiedad.prop_geo}}" title="{{propiedad.Propiedad.prop_direccion}}" icon="img/house_marker_{{(propiedad.Propiedad.op_monto_venta > 0) ? 'green' : 'red'}}.png"></marker>
+                <marker ng-repeat="propiedad in propiedades" position="{{propiedad.Propiedad.prop_geo}}" title="{{propiedad.Propiedad.prop_direccion}}" icon="img/house_marker_{{(propiedad.Propiedad.prop_estado === 'Vendida') ? 'green' : ((propiedad.Propiedad.prop_estado === 'Publicada') ? 'blue' : 'red')}}.png"></marker>
             </map> 
         </div>
     </ion-content>
